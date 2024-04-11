@@ -54,7 +54,7 @@ const userSchema = new Schema(
 //next is due to the middle ware to pass the next
 userSchema.pre("save",async function (next){
     if(!this.isModified("password")) return next()  // to check the password has modified or not
-    this.password = bcrypt.hash(this.password,10)
+    this.password = await bcrypt.hash(this.password,10)
     next()
 })
 
@@ -104,4 +104,4 @@ userSchema.method.generateRefreshToken = function (){
     )
 }
 
-export const user = mongoose.model("USer",userSchema)
+export const User = mongoose.model("User",userSchema)
