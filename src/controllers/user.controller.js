@@ -16,16 +16,15 @@ const registeredUser = asyncHandler(async (req,res)=>{
     //return res
 
     //1> destructuring  data
-    const {username ,fullName,email,password} = res.body
-    console.log(req,"req")
-    console.log(req.body,"req body")
-    console.log(req.files,"req files")
+    // console.log("req Check ********1")
+    // console.log(req.body,"req body")
+    const {username,fullName,email,password} = req.body
     //2>
     if([username,email,fullName,password].some((el)=> el.trim() === '')){
         throw new ApiErrors(400,"All fields are required")
     }
     //3> User.findOne({email}) but we want if username/email exists
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or :[{username},{email}]
     })
     if(existedUser){
@@ -33,18 +32,22 @@ const registeredUser = asyncHandler(async (req,res)=>{
     }
     //4>
     const avatarLocal = req.files?.avatar[0]?.path
-    const coverImageLocal = req.files?.coverImage[0]?.path
+    // const coverImageLocal = req.files?.coverImage[0]?.path
+    let coverImageLocal ;
+    if(req.files && Array.isArray(req.files.coverImage) && req.files?.coverImage.length>0){
+        coverImageLocal = req.files?.coverImage[0]?.path
+    }
     if(!avatarLocal){
         throw new ApiErrors(400,`Avatar file is required!.`)
     }
     //5>
     const avatarUploadImg = await uploadOnCloudinary(avatarLocal)
     if(!avatarUploadImg){
-        throw new ApiErrors(400,`Avatar file is required!.`)
+        throw new ApiErrors(400,`Avatar file in cloudinary failed`)
     }
     const coverUploadImg = await uploadOnCloudinary(coverImageLocal)
     //6>
-    const user = User.create({
+    const user = await User.create({
         fullName,
         avatar : avatarUploadImg?.url,
         coverImage :coverUploadImg?.url ||"",
