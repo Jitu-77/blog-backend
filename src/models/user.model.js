@@ -67,7 +67,7 @@ userSchema.pre("save",async function (next){
  * @returns 
  */
 userSchema.method.isPasswordCorrect = async function (password){
-    // here bcrypt takes 2 args password (unencrypted)as string and the encoded value (this.password(got by context))_
+    // here bcrypt takes 2 args password (unencrypted passed from front end)as string and the encoded value (this.password(got by context))_
     return await bcrypt.compare(password,this.password) 
 }
 /**

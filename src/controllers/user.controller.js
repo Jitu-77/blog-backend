@@ -74,4 +74,94 @@ const registeredUser = asyncHandler(async (req,res)=>{
     return res.status(201).json(new ApiResponse(200,createdUser,"User Registered Successfully!"))
 })
 
-export {registeredUser}
+const generatedAccessAndRefreshToken = async(userId)=>{
+    try {
+        const user = await User.findById(userId)  
+        const accessToken = user.generateAccessToken()       
+        const refreshToken = user.generateRefreshToken()
+        //saving refreshToken
+        user.refreshToken = refreshToken
+        //save is given by mongo instance
+        //we need to save the user instance but we wont save the password 
+        //hence will use {validateBeforeSave:false}
+        await user.save({validateBeforeSave:false})
+        return {accessToken,refreshToken}
+    }   catch (error) {
+        throw new ApiErrors(500,"Error in generating refresh and access token")
+    }
+}
+
+
+const loginUser = asyncHandler(async(req,res)=>{
+        //1>req body ->data
+        //2>username or email check
+        //3>find the user
+        //4>password check
+        //5>access and refresh token
+        //6>send cookies 
+        //1>
+        const {email,username,password} = req.body
+        //2>
+        if(!username || !email){
+            throw new ApiErrors (400,"Username or email is required!")
+        }
+        //3>
+        const user = await User.findOne({
+            $or:[{username},{password}]
+        })
+        if(!user){
+            throw new ApiErrors (404,"User does not exist!")
+        }
+        //4>
+        const isPasswordValid = await user.isPasswordCorrect(password)
+        if(!isPasswordValid){
+            throw new ApiErrors (401,"Invalid user credentials!")
+        }
+        //5>
+       const {accessToken,refreshToken} =  await generatedAccessAndRefreshToken(user._id)
+       const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+        //6>
+        const options = {
+            httpOnly:true, //httpOnly signifies it cannot be edited in front end , will only be edited in server
+            secure:true 
+        }
+        //return response 
+        return res.status(200)
+        .cookie("accessToken",accessToken,options)
+        .cookie("refreshToken",refreshToken,options)
+        .json(
+            new ApiResponse(
+                200,
+                {
+                    user:loggedInUser,accessToken,refreshToken
+                },
+                "user logged in successfully!"
+            )
+        )
+})
+
+
+//for logout we need to clear the cookies from the server 
+//remove the refresh token
+const logoutUser  =asyncHandler(async(req,res)=>{
+    await User.findByIdAndUpdate(
+        req.user._id,{
+            $set:{
+                refreshToken : undefined
+            }
+        },{
+            new:true // to get the new updated value in response
+        }
+    )
+    const options = {
+        httpOnly:true, 
+        secure:true 
+    }
+    return res
+    .status(200)
+    .clearCookie("accessToken",options)
+    .clearCookie("refreshToken",options)
+    .json(new ApiResponse(200,{},"User logged out"))
+})
+
+export {registeredUser,loginUser,logoutUser}
