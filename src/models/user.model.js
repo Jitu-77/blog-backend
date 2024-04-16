@@ -66,7 +66,8 @@ userSchema.pre("save",async function (next){
  * @param {*} password 
  * @returns 
  */
-userSchema.method.isPasswordCorrect = async function (password){
+userSchema.methods.isPasswordCorrect = async function (password){
+    //methods are used in mongodb schema which are basically defined on schema
     // here bcrypt takes 2 args password (unencrypted passed from front end)as string and the encoded value (this.password(got by context))_
     return await bcrypt.compare(password,this.password) 
 }
@@ -74,7 +75,7 @@ userSchema.method.isPasswordCorrect = async function (password){
  * generate Access token
  * @returns 
  */
-userSchema.method.generateAccessToken = function (){
+userSchema.methods.generateAccessToken = function (){
    return jwt.sign(
         {
             _id:this._id,  //this context will automatically get the information via mongo property
@@ -92,7 +93,7 @@ userSchema.method.generateAccessToken = function (){
  * generate Refresh Token
  * @returns 
  */
-userSchema.method.generateRefreshToken = function (){
+userSchema.methods.generateRefreshToken = function (){
    return jwt.sign(
         {
             _id:this._id,  //this context will automatically get the information via mongo property
