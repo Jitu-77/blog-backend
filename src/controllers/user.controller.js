@@ -165,9 +165,13 @@ const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
-      $set: {
-        refreshToken: undefined,
-      },
+      // $set: {
+      //   refreshToken: undefined, // or null
+      // },
+      //better approach
+      $unset:{
+        refreshToken:1 //this removes the field from document
+      }
     },
     {
       new: true, // to get the new updated value in response
@@ -195,16 +199,17 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       incomingRefreshToken,
       process.env.REFRESH_TOKEN_SECRET
     );
-    console.log(decodedToken);
+    console.log(decodedToken,"decodedToken");
     //we have made our refresh token using _id , do the decoded token payload will contain mongo db id
     const user = await User.findById(decodedToken?._id);
     if (!user) {
       throw new ApiErrors(401, "Invalid user token!");
     }
+    console.log(user,"user");
     //refreshToken is already stored in db
     //so we will search for stored refresh token if already logged in , this must be saved
-
-    if (incomingRefreshToken !== user?.refreshAccessToken) {
+    console.log(user?.refreshToken,"user?.refreshAccessToken")
+    if (incomingRefreshToken !== user?.refreshToken) {
       throw new ApiErrors(401, "Refresh token is expired or used");
     }
 
@@ -341,7 +346,7 @@ const getUserChannelProfile = asyncHandler(async (req,res)=>{
         //this triggering point is by url parsing
         //front end url is by sending url as params 
         //eg:https://www.youtube.com/@HT-Videos
-
+        console.log(req.params,"req.params")
         const {username} = req.params
         if(!username?.trim()){
               throw new ApiErrors(400,"Username is missing")
@@ -384,10 +389,10 @@ const getUserChannelProfile = asyncHandler(async (req,res)=>{
                 $cond:{  //  to make a if else run $ sign here signifies it is field
                   if:{ 
                     // in helps to parse an array or obj  here ( $subscribers.subscriber)          
-                    $in  :[req.user._id,"$subscribers.subscriber"] ,
-                    then: true,
-                    else:false
-                  }
+                    $in  :[req.user._id,"$subscribers.subscriber"]
+                  },
+                  then: true,
+                  else:false
                 }
               }
             }

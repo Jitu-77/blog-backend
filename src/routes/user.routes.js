@@ -53,7 +53,7 @@ userRouter
   .patch(verifyJwt, upload.single("coverImage"), updateUserImage);
 
 //using url params
-userRouter.route("/@:username").get(verifyJwt, getUserChannelProfile);
+userRouter.route("/name/:username").get(verifyJwt, getUserChannelProfile);
 
 userRouter.route("/history").get(verifyJwt, getWatchHistory);
 export { userRouter };
