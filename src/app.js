@@ -17,12 +17,12 @@ app.use(cookieParser())
 
 //routes import
 import {userRouter} from "./routes/user.routes.js"
+import { healthCheckRouter } from "./routes/healthCheck.routes.js" 
 // import userCustomRouters from "./routes/user.routes.js"
 
+app.use("/api/v1/healthCheck",healthCheckRouter)
 //routes declaration
 //app.get() -- this will not work as we have separated routes so now we need to use it as middleware by app.use()
 app.use("/api/v1/users",userRouter)
 // app.use("/api/v1/users",userCustomRouters)
-
-
 export default app
