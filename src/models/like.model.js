@@ -3,19 +3,19 @@ const likesSchema = new Schema(
     {
         comment :{
             type:Schema.Types.ObjectId,
-            ref:"comments"
+            ref:"Comment"
         },
         video:{
             type:Schema.Types.ObjectId,
-            ref:"videos"
+            ref:"Video"
         },
         likedBy : {
             type:Schema.Types.ObjectId,
-            ref:"users"
+            ref:"User"
         },
         tweet : {
             type:Schema.Types.ObjectId,
-            ref:"tweets"
+            ref:"Tweet"
         },
     },
     {

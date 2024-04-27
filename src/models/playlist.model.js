@@ -13,12 +13,12 @@ const playListSchema = new Schema(
     video: [
       {
         type: Schema.Types.ObjectId,
-        ref: "videos",
+        ref: "Video",
       },
     ],
     owners: {
       type: Schema.Types.ObjectId,
-      ref: "users",
+      ref: "User",
     },
   },
   {
