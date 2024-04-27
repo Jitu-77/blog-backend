@@ -39,4 +39,4 @@ import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2"
     { timestamps: true }
 ) 
 videoSchema.plugin(mongooseAggregatePaginate)
-export const video = mongoose.model("Video",videoSchema)
+export const Video = mongoose.model("Video",videoSchema)
