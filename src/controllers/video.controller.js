@@ -178,6 +178,15 @@ const deleteVideosById = asyncHandler(async(req,res)=>{
     console.log(videoDetails,"videoDetails----")
 })
 const updateView = asyncHandler(async(req,res)=>{
+    console.log("----UPDATE_VIEW------")
+        const token = req.cookies?.accessToken // req has access to all the middlewares
+                  || req.header("Authorization")?.replace("Bearer ","") 
+        if(token) {
+            const decodedToken = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET)
+            const user = await User.findById(decodedToken._id).select(
+                "-password -refreshToken")
+            console.log("AUTH ----- CHECK-----",token,user)    
+        }
         const{_id} = req.body
         const videoDetails = await Video.findByIdAndUpdate(
             _id,
