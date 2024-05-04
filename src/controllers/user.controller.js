@@ -354,7 +354,7 @@ const getUserChannelProfile = asyncHandler(async (req,res)=>{
         //now find the user in db and apply aggregation pipeline
         //the process will be lengthy hence we will use aggregation pipeline by match
         //match will parse the entire collection and returns a single object
-        //aggregate ia method already defined in mongo
+        //aggregate is method already defined in mongo
         const channel = await User.aggregate([
           {
             $match :{

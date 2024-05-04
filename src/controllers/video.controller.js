@@ -178,14 +178,13 @@ const deleteVideosById = asyncHandler(async(req,res)=>{
     console.log(videoDetails,"videoDetails----")
 })
 const updateView = asyncHandler(async(req,res)=>{
-    console.log("----UPDATE_VIEW------")
         const token = req.cookies?.accessToken // req has access to all the middlewares
                   || req.header("Authorization")?.replace("Bearer ","") 
+        let user =   {}
         if(token) {
             const decodedToken = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET)
-            const user = await User.findById(decodedToken._id).select(
+            user = await User.findById(decodedToken._id).select(
                 "-password -refreshToken")
-            console.log("AUTH ----- CHECK-----",token,user)    
         }
         const{_id} = req.body
         const videoDetails = await Video.findByIdAndUpdate(
@@ -199,6 +198,18 @@ const updateView = asyncHandler(async(req,res)=>{
                 new : true
             }
         )
+        if(user){
+            console.log(user)
+            const userDetails = await User.findByIdAndUpdate(
+                // new mongoose.Types.ObjectId(user._id),
+                user._id,
+                {
+                    $push:{
+                        watchHistory:_id
+                    }
+                }
+            )
+        }
         if(!videoDetails){
             throw new ApiErrors(500,"View Update failing")
         }
