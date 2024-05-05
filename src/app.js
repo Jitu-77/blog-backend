@@ -20,6 +20,7 @@ import {userRouter} from "./routes/user.routes.js"
 import { healthCheckRouter } from "./routes/healthCheck.routes.js" 
 import { videoRouter } from "./routes/video.routes.js"
 import {subscriptionRoute} from "./routes/subscription.routes.js"
+import {playListRouter} from "./routes/playlist.routes.js"
 // import userCustomRouters from "./routes/user.routes.js"
 
 app.use("/api/v1/healthCheck",healthCheckRouter)
@@ -34,4 +35,7 @@ app.use("/api/v1/videos",videoRouter)
 
 //SUBSCRIPTION ROUTES
 app.use("/api/v1/subscriptions",subscriptionRoute)
+
+//PLAYLIST ROUTE
+app.use("/api/v1/playlist",playListRouter)
 export default app

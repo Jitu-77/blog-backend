@@ -5,9 +5,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiErrors } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 
-//1>> post toggle subscription
-//2>    get subscribers list
-//3>get subscriber to list
 const toggleSubscription = asyncHandler(async (req, res) => {
   const userDetails = req.user;
   if (!userDetails) {

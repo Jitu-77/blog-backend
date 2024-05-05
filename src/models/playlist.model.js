@@ -16,7 +16,7 @@ const playListSchema = new Schema(
         ref: "Video",
       },
     ],
-    owners: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
@@ -26,4 +26,4 @@ const playListSchema = new Schema(
   }
 );
 
-export const playList = mongoose.model("Playlist",playListSchema)
+export const Playlist = mongoose.model("Playlist",playListSchema)
