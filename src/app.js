@@ -21,6 +21,9 @@ import { healthCheckRouter } from "./routes/healthCheck.routes.js"
 import { videoRouter } from "./routes/video.routes.js"
 import {subscriptionRoute} from "./routes/subscription.routes.js"
 import {playListRouter} from "./routes/playlist.routes.js"
+import { likeRouter } from "./routes/like.routes.js"
+import { commentRouter } from "./routes/comment.routes.js"
+import { tweetRouter } from "./routes/tweet.routes.js"
 // import userCustomRouters from "./routes/user.routes.js"
 
 app.use("/api/v1/healthCheck",healthCheckRouter)
@@ -38,4 +41,13 @@ app.use("/api/v1/subscriptions",subscriptionRoute)
 
 //PLAYLIST ROUTE
 app.use("/api/v1/playlist",playListRouter)
+
+//LIKED ROUTE
+app.use("/api/v1/like",likeRouter)
+
+//COMMENT ROUTE
+app.use("/api/v1/comments",commentRouter)
+
+//TWEET ROUTE
+app.use("/api/v1/tweet",tweetRouter)
 export default app
