@@ -54,9 +54,9 @@ const deleteComment = asyncHandler(async (req, res) => {
 });
 
 const getAllComments = asyncHandler(async (req, res) => {
-  const _id = req.params;
+  const {video} = req.params;
   const getAllComments = await Comment.find({
-    video: _id,
+    video: video,
   });
   if (!getAllComments) {
     throw new ApiErrors(500, "Failed to get comment!");

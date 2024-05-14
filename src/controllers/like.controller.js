@@ -43,7 +43,6 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
     $and: [{ comment: _id, likedBy: userDetail?._id }],
   });
   if (toggleCommentLike?.length) {
-    console.log("Comment like present ----> absent");
     const toggleComment = await Like.findOneAndDelete({
       $and: [{ comment: _id, likedBy: userDetail?._id }],
     });
@@ -54,7 +53,6 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
       .status(201)
       .json(new ApiResponse(201, toggleComment, "video un-liked"));
   } else {
-    console.log("Comment like absent --> present ");
     const toggleComment = await Like.create({
       comment: _id,
       likedBy: userDetail?._id,
@@ -86,7 +84,6 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
         .status(201)
         .json(new ApiResponse(201, toggleTweet, "Tweet un-liked"));
     } else {
-      console.log("Comment like absent --> present ");
       const toggleTweet = await Like.create({
         tweet: _id,
         likedBy: userDetail?._id,
@@ -101,10 +98,12 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 });
 
 const getLikedVideo = asyncHandler(async (req, res) => {
+  console.log(req.user)
   const userDetail = req.user;
+
   const likedVideo = await Like.aggregate([
     {
-      $match: { likedBy: userDetail?._id },
+      $match: { likedBy: userDetail?._id ,video: { $exists: true }},
     },
     {
       $lookup: {
@@ -115,11 +114,22 @@ const getLikedVideo = asyncHandler(async (req, res) => {
       },
     },
     {
+      $unwind: "$likedVideoList", // Flatten the likedVideoList array
+    },
+    {
+      $group: {
+        _id: null,
+        likedVideoList: { $push: "$likedVideoList" }, // Push all documents into a single array
+      },
+    },
+    {
       $project: {
-        likedVideoList,
+        likedVideoList: 1,
+        _id:0
       },
     },
   ]);
+  console.log(likedVideo)
   if (!likedVideo) {
     throw new ApiErrors(500, "Unable to fetch video files");
   }
@@ -128,7 +138,7 @@ const getLikedVideo = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         201,
-        likedVideo[0],
+        likedVideo,
         "Liked video list fetched successfully"
       )
     );
