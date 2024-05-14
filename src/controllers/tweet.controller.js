@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { asyncHandler } from "../utils/asyncHandler";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const createTweet = asyncHandler((req, res) => {
     
