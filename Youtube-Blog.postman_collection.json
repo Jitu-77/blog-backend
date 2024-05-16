@@ -1,0 +1,1257 @@
+{
+	"info": {
+		"_postman_id": "3e9b530c-fb62-4a0a-a46e-e327d5874b90",
+		"name": "Youtube-Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14832800"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "John Wick",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "john@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password@123",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "John's",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Concierge/MG/accessoryImages/desktop/thumbnail-images/MG_ZS_EV_EX_ACC_EXC_EXT_BG_MESH.png"
+								},
+								{
+									"key": "coverImage",
+									"type": "file",
+									"src": "/C:/Concierge/MG/accessoryImages/desktop/model-images/4.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/register",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						},
+						"description": "Post body for user registration"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"jp077\",\r\n    \"password\":\"Pass123\"\r\n    // \"username\":\"jp's\",\r\n    // \"password\":\"Password@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/logout",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE3ZGQ3MTdmNjViYmI3OWM5OTdlYTAiLCJpYXQiOjE3MTMzNjkyNTQsImV4cCI6MTcxNDIzMzI1NH0.CUICTCqZHEYmftqWubeKa9HWLzSs1bBUO_KEKDIFF2U\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/refresh-token",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\" : \"Password@123\" ,\r\n    \"newPassword\" : \"Pass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/changePassword",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCurrentUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/current-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"current-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-avatar",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/JYOTIRMOY PAL/Downloads/new-tata-logo.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/update-avatar",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"update-avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-cover-image",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "coverImage",
+									"type": "file",
+									"src": "/C:/Users/JYOTIRMOY PAL/Downloads/no-image-available-icon 2.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/update-cover-image",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"update-cover-image"
+							],
+							"query": [
+								{
+									"key": "coverImage",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-account",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\" : \"Jyotirmoy Pal's\" ,\r\n    \"email\" : \"jyotirmoypal077@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/update-account",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"update-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-history",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/history",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-channel-info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/name/jp077",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"name",
+								"jp077"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "healthCheck",
+			"item": [
+				{
+					"name": "healthCheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/healthCheck/status",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"healthCheck",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "video",
+			"item": [
+				{
+					"name": "uploadVideo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "New Tigor",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New Tigor model",
+									"type": "text"
+								},
+								{
+									"key": "isPublished",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "videoFile",
+									"type": "file",
+									"src": "/E:/TATA ASSETS/IPAD PROD ASSETS-TATA/7/six_steps_assets/video/7/Safari_6.mp4"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/E:/TATA ASSETS/IPAD PROD ASSETS-TATA/7/six_steps_assets/thumbnail_images/7/Traffic Sign Recognition.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/videos/uploadVideo",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"uploadVideo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteVideo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/videos/deleteVideo/662d4527fd0d9741c58b9e3f",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"deleteVideo",
+								"662d4527fd0d9741c58b9e3f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllVideoById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/videos/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVideosByUserName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/videos/allVideos/jp077",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"allVideos",
+								"jp077"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publishVideo",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isPublished\" : true,\r\n    \"_id\":\"662e01e37617aab36707d060\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/videos/publish",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateView",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"662e01e37617aab36707d060\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/videos/view",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateVideoDetails",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"New Tigor Updated\",\r\n    \"isPublished\":\"true\",\r\n    \"description\":\"Tigor new description\",\r\n    \"_id\":\"662e01e37617aab36707d060\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/videos/updateVideoDetails",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"updateVideoDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateImage",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_id",
+									"value": "662d48fb4cc273f9e43478d4",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/E:/TATA ASSETS/IPAD PROD ASSETS-TATA/7/six_steps_assets/images/7/Forward Collision Warning.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/videos/updateImage",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"updateImage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateVideo",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_id",
+									"value": "662d48fb4cc273f9e43478d4",
+									"type": "text"
+								},
+								{
+									"key": "videoFile",
+									"type": "file",
+									"src": "/E:/TATA ASSETS/IPAD PROD ASSETS-TATA/7/six_steps_assets/video/7/Safari_7.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/videos/updateVideo",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"videos",
+								"updateVideo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "toggleSubscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"6617dd717f65bbb79c997ea0\" \r\n    // \"_id\":\"6617db8d7f65bbb79c997e9a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/subscriptions/toggleSubscription",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subscriptions",
+								"toggleSubscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSubscribedToList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/subscriptions/getSubscribedToList",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subscriptions",
+								"getSubscribedToList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSubscribersList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/subscriptions/getSubscribersList",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subscriptions",
+								"getSubscribersList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"name\":\"Jp0771 --2\",\r\n    // \"description\":\"Jp's077 Playlist desc2\",\r\n    // \"video\":\"662e01e37617aab36707d060\"\r\n    \"name\":\"Jp0771 --5\",\r\n    \"description\":\"Jp's077 Playlist desc5\",\r\n    \"video\":\"662e01e37617aab36707d060\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/create",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"6637311185edb2a8846eeed6\",\r\n    \"name\":\"Jp0771 --2(new)\",\r\n    \"description\":\"Jp's077 Playlist desc2(newly made)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"663730fd85edb2a8846eeed3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/delete",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/fetch",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"fetch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/playlist/fetch/6637311185edb2a8846eeed6",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"fetch",
+								"6637311185edb2a8846eeed6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeVideo",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6637311185edb2a8846eeed6\",\r\n    \"video\":[\"662d4c55604202a07f1ad8b3\",\"663744f0b7bfb7d55a59b650\"]\r\n    // \"video\":\"66375f468d398e000d0a3f0b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/remove",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addVideo",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6637311185edb2a8846eeed6\",\r\n    // \"video\":[\"662d4c55604202a07f1ad8b3\",\"663744f0b7bfb7d55a59b650\"]\r\n    \"video\":\"66375f468d398e000d0a3f0b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/add",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "addComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"video\" :\"662e01e37617aab36707d060\",\r\n    \"content\" :\"garda macha dia bhai  jp077 2 for tigor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comments/add",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateComments",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\" :\"gajab jp077 2 for tigor updated .....\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comments/update/66439535dd3a606b4001d255",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"update",
+								"66439535dd3a606b4001d255"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteComments",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comments/delete/",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllComments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comments/get/662e01e37617aab36707d060",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"get",
+								"662e01e37617aab36707d060"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tweets",
+			"item": [
+				{
+					"name": "addTweet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"Hi this is my third tweet\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/tweet/add",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweet",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTweet",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"Thrd tweet updated to fourth\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/tweet/update/6644e7460a80e22189a280bf",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweet",
+								"update",
+								"6644e7460a80e22189a280bf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTweet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/tweet/delete/6644e7460a80e22189a280bf",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweet",
+								"delete",
+								"6644e7460a80e22189a280bf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllTweetsByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/tweet/getAll",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweet",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Likes",
+			"item": [
+				{
+					"name": "getLikedVideo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/like/getLikedVideo",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"getLikedVideo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggleTweetLike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"662e01e37617aab36707d060\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/like/toggleTweetLike",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"toggleTweetLike"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggleCommentLike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"66439471dd3a606b4001d252\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/like/toggleCommentLike",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"toggleCommentLike"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggleVideoLike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"662e01e37617aab36707d060\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/like/toggleVideoLike",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"toggleVideoLike"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "getChannelVideo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/dashboard/videos",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"dashboard",
+								"videos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dashboardStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/dashboard/stats",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"dashboard",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
