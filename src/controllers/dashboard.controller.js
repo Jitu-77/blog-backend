@@ -30,8 +30,18 @@ const getChannelStats = asyncHandler(async (req, res) => {
             }
         },
         {
+          $unwind: "$subscribersList", // Flatten the likedVideoList array
+        },
+        {
+          $group: {
+            _id: null,
+            subscribersList: { $push: "$subscribersList" }, // Push all documents into a single array
+          },
+        },
+        {
             $project:{
-                subscribersList:1
+                subscribersList:1,
+                _id:0
             }
         }
     ])
@@ -41,25 +51,72 @@ const getChannelStats = asyncHandler(async (req, res) => {
                       fullName :el?.fullName,avatar:el?.avatar,coverImage:el?.coverImage
                       }
     }) : []
-    let likeDetails = await Video.aggregate([
+    const likedVideo = await Like.aggregate([
         {
-            $match : {owner:userDetails?._id}
+          $match: { likedBy: userDetails?._id ,video: { $exists: true }},
         },
         {
-            $lookup:{
-                from:"likes",
-                localField:"owner",
-                foreignField:"video",
-                as : "likedVideo"
-            }
-        }
+          $lookup: {
+            from: "videos",
+            localField: "video",
+            foreignField: "_id",
+            as: "likedVideoList",
+          },
+        },
+        {
+          $unwind: "$likedVideoList", // Flatten the likedVideoList array
+        },
+        {
+          $group: {
+            _id: null,
+            likedVideoList: { $push: "$likedVideoList" }, // Push all documents into a single array
+          },
+        },
+        {
+          $project: {
+            likedVideoList: 1,
+            _id:0
+          },
+        },
+    ]);
+    const channelLikeVideoDetails = await Video.aggregate([
+        {
+            $match: { owner: userDetails?._id },
+        },
+        {
+            $lookup: {
+              from: "likes",
+              localField: "_id",
+              foreignField: "video",
+              as: "channelLikeVideoList",
+            },
+        },
+        {
+            $unwind: "$channelLikeVideoList", // Flatten the likedVideoList array
+        },
+          {
+            $group: {
+              _id: null,
+              channelLikeVideoList: { $push: "$channelLikeVideoList" }, // Push all documents into a single array
+            },
+          },
+          {
+            $project: {
+                channelLikeVideoList: 1,
+              _id:0
+            },
+          },
     ])
-    console.log(channelVideo,"channelVideo 1")
-    console.log(totalVideoViews,"totalVideoViews 1")
-    console.log(channelSubscribersDetails,"channelSubscribersDetails 1")
-    console.log(likeDetails,"likeDetails 1")
+    let data = {
+        channelVideo,
+        totalVideoViews,
+        channelSubscribersDetails,
+        likedVideo,
+        channelLikeVideoDetails
+    }
+    res.status(201)
+        .json(new ApiResponse(201,data,"Data fetched successfully"))
 })
-
 const getChannelVideos = asyncHandler(async (req, res) => {
     // TODO: Get all the videos uploaded by the channel
     const userDetails = req?.user

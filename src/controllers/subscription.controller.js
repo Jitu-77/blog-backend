@@ -64,8 +64,18 @@ const getSubscribersList = asyncHandler(async (req, res) => {
             }
         },
         {
+          $unwind: "$subscribersList", // Flatten the likedVideoList array
+        },
+        {
+          $group: {
+            _id: null,
+            subscribersList: { $push: "$subscribersList" }, // Push all documents into a single array
+          },
+        },
+        {
             $project:{
-                subscribersList:1
+                subscribersList:1,
+                _id:0
             }
         }
     ])
