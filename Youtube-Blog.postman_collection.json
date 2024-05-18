@@ -70,7 +70,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"jp077\",\r\n    \"password\":\"Pass123\"\r\n    // \"username\":\"jp's\",\r\n    // \"password\":\"Password@123\"\r\n}",
+							"raw": "{\r\n    // \"username\":\"jp077\",\r\n    // \"password\":\"Pass123\"\r\n    \"username\":\"jp's\",\r\n    \"password\":\"Password@123\"\r\n    // \"username\":\"rooney's\",\r\n    // \"password\":\"Password@123\"\r\n    //     \"username\":\"jam's\",\r\n        //  \"username\":\"john's\",\r\n    // \"password\":\"Password@123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -330,14 +330,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/users/name/jp077",
+							"raw": "{{server}}/users/name/jp's",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"users",
 								"name",
-								"jp077"
+								"jp's"
 							]
 						}
 					},
@@ -381,12 +381,12 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "New Tigor",
+									"value": "Nexon3",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "New Tigor model",
+									"value": "New Nexon4 model",
 									"type": "text"
 								},
 								{
@@ -397,12 +397,12 @@
 								{
 									"key": "videoFile",
 									"type": "file",
-									"src": "/E:/TATA ASSETS/IPAD PROD ASSETS-TATA/7/six_steps_assets/video/7/Safari_6.mp4"
+									"src": "/E:/TATA ASSETS/New Assets && Brochure Images - 8Th Apr Dev/new-assets-to be-updated/2/six_steps_assets/video/2/Nexon_2.mp4"
 								},
 								{
 									"key": "thumbnail",
 									"type": "file",
-									"src": "/E:/TATA ASSETS/IPAD PROD ASSETS-TATA/7/six_steps_assets/thumbnail_images/7/Traffic Sign Recognition.jpg"
+									"src": "/E:/TATA ASSETS/New Assets && Brochure Images - 8Th Apr Dev/new-assets-to be-updated/2/six_steps_assets/thumbnail_images/2/ira.jpg"
 								}
 							]
 						},
@@ -466,7 +466,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/videos/allVideos/jp077",
+							"raw": "{{server}}/videos/allVideos/jp077?page=2&limit=5",
 							"host": [
 								"{{server}}"
 							],
@@ -474,6 +474,16 @@
 								"videos",
 								"allVideos",
 								"jp077"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -513,7 +523,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\":\"662e01e37617aab36707d060\"\r\n}",
+							"raw": "{\r\n    \"_id\":\"66464872b1d2ffca81b0a3ed\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -638,7 +648,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\":\"6617dd717f65bbb79c997ea0\" \r\n    // \"_id\":\"6617db8d7f65bbb79c997e9a\"\r\n}",
+							"raw": "{\r\n    // \"_id\":\"6617dd717f65bbb79c997ea0\" \r\n    \"_id\":\"6617db8d7f65bbb79c997e9a\" \r\n    // \"_id\":\"6646418406cb375dc698eae3\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -902,7 +912,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"video\" :\"662e01e37617aab36707d060\",\r\n    \"content\" :\"garda macha dia bhai  jp077 2 for tigor\"\r\n}",
+							"raw": "{\r\n    \"video\" :\"66464872b1d2ffca81b0a3ed\",\r\n    \"content\" :\"great job done \"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1190,7 +1200,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"662e01e37617aab36707d060\"\r\n}\r\n",
+							"raw": "{\r\n    \"_id\": \"6646472fb1d2ffca81b0a3dd\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
