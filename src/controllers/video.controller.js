@@ -132,28 +132,72 @@ const updateImage = asyncHandler(async (req,res)=>{
 
 })
 const getAllVideosByUserName = asyncHandler(async (req,res)=>{
-    console.log("here in get by username")
-    const {username} = req.params
-    console.log("here in get by username",username)
-   const user = await User.aggregate([
-    {
-        $match : {username:username}
-    },
-    {
-     $lookup:{
-        from : "videos",
-        localField:"_id",
-        foreignField:"owner",
-        as :"videoList"
-     }
-    }
-   ])
-   console.log(user[0].videoList,"user---+++----")
-   if(!user){
-    throw new ApiErrors(500,"something went wrong while fetching data!.")
-   }
-   return res.status(201)
-   .json(new ApiResponse(201,user[0].videoList,"Fetching video successfully"))
+  const { username } = req.params;
+  const { page, limit } = req.query;
+  // using aggregate options and slice , here skip and limit will fail
+    const user = await User.aggregate([
+      {
+        $match: { username: username },
+      },
+      {
+        $lookup: {
+          from: "videos",
+          localField: "_id",
+          foreignField: "owner",
+          as: "videoList",
+        },
+      },
+      {
+        $addFields: {
+          videoList: {
+            $slice: [
+              "$videoList",
+              (Number(page) - 1) * Number(limit),
+              Number(limit),
+            ],
+          },
+        },
+      },
+    ]);
+  //################################################################
+  // using skip and limit technique
+  //    const user = await Video.aggregate([
+  //     {
+  //         $match :{owner : new mongoose.Types.ObjectId('6617dd717f65bbb79c997ea0')}
+  //     },
+  //         {
+  //         $skip : (Number(page)-1)*Number(limit),
+
+  //     },
+  //     {
+  //         $limit : Number(limit)
+  //     }
+  //    ])
+  //    console.log(user)
+  //################################################################
+  //using aggregatePaginate
+  //   const pipeline = [
+  //     {
+  //       $match: {
+  //         owner: new mongoose.Types.ObjectId("6617dd717f65bbb79c997ea0"),
+  //       },
+  //     },
+  //   ];
+  //   const user = Video.aggregate(pipeline);
+  //   const options = {
+  //     page: Number(page),
+  //     limit: Number(limit),
+  //   };
+  //   const finalRes = await Video.aggregatePaginate(user, options);
+
+  if (!user) {
+    throw new ApiErrors(500, "something went wrong while fetching data!.");
+  }
+  return res
+    .status(201)
+    .json(
+      new ApiResponse(201, user[0].videoList, "Fetching video successfully")
+    );
 })
 const getAllVideosById = asyncHandler(async(req,res)=>{
     console.log("here in get by id")
